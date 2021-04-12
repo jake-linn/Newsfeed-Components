@@ -103,6 +103,7 @@ const data = [
     <span class="expandButton">+</span>
   </div>
 
+
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 
@@ -114,3 +115,78 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+
+const articleMaker = (data) => {
+
+// step 1; creating articleMaker w/ 'data' as an agurment 
+
+const article = document.createElement('div');
+const titlePage = document.createElement ('h2');
+const p1 = document.createElement('p');
+const p2 = document.createElement('p');
+const p3 = document.createElement('p');
+const date = document.createElement('p');
+const expandButton = document.createElement('span');
+
+{/* <div class="article">
+    <h2>{title of the article}</h2>
+    <p class="date">{date of the article}</p>
+
+    {three separate paragraph elements}
+
+    <span class="expandButton">+</span>
+  </div> */}
+
+  article.append(titlePage, p1, p2, p3, expandButton);
+
+  article.classList.add('article');
+  date.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+
+  // putting text on page 
+  
+  // using JSON data from 'data'
+
+  titlePage.textContent = data.title;
+  p1.textContent = data.firstParagraph;
+  p2.textContent = data.secondParagraph;
+  p3.textContent = data.thirdParagraph;
+  data.textContent = data.date;
+  expandButton.textContent = 'click me!';
+
+
+  // step 2: adding an event listener to span.expand 
+
+  // toppe the class 'atricle-open' on div.article 
+
+  expandButton.addEventListener ('click', () => {
+article.classList.toggle('article-open')
+
+  });
+
+
+  // Step 3: Don't forget to return something from your function!
+
+  return article
+
+
+};
+
+// Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
+//   to create a div.article element and append it to the DOM inside div.articles (see index.html).
+
+const articles = document.querySelector('.articles');
+
+data.push ({ 
+  title: 'Jake Linn',
+  date: 'April 20th, 1995',
+  firstParagraph: 'this is the first paragraph',
+  secondParagraph: 'here is the second paragraph',
+  thirdParagraph: 'third and final paragraph'
+});
+
+data.forEach((data) => {
+  articles.appendChild(articleMaker(data));
+});
